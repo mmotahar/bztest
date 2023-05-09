@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="internal_layout_final_invoice">-->
+<!--        <div class="header">-->
+<!--        </div>-->
+<!--        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+<!--            <t t-raw="0"/>-->
+<!--        </div>-->
+<!--    </template>-->
+
+    <template id="invoice_new_temp_inherit" inherit_id="studio_customization.report_invoice_docum_6b938905-d7f1-4081-b377-ee79edf6a3d4">
+<!--        <xpath expr="//div[@class='page']/h2" position="before">-->
+<!--            <div style="text-align:center;margin-bottom:100px;">-->
+<!--                <div class="col-12">-->
+<!--                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" width="27%"/>-->
+<!--                </div>-->
+<!--                <div class="col-12 text-center">-->
+<!--                    <h4 t-field="o.company_id.report_header"/>-->
+<!--                    <div name="company_address">-->
+<!--                        <span t-if="o.company_id.company_details" t-field="o.company_id.company_details"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+        <xpath expr="//div[@class='clearfix']" position="inside">
+            <t t-if="o.timesheet_ids">
+                <br/>
+                <h5 style="text-align:left;"><strong><u>Task Details</u></strong></h5>
+                <table width="100%" style="border: none;margin-bottom:40px;">
+                    <tr style="font-size:15px;">
+                        <th style="text-align:left;" width="12%">Date</th>
+                        <th style="text-align:center;" width="8%">Lawyer</th>
+                        <th style="text-align:left;" width="38%">Description</th>
+                        <th style="text-align:center;" width="14%">Rate</th>
+                        <th style="text-align:center;" width="14%">Quantity</th>
+                        <th style="text-align:center;" width="14%">Total</th>
+                    </tr>
+                    <t t-set="timesheet_ids" t-value="get_timesheet_in_order(o.timesheet_ids)"/>
+                    <t t-foreach="timesheet_ids" t-as="timesheet">
+                        <tr style="text-align:center;">
+                            <td style="border: none;text-align:left;">
+                                <t t-if="timesheet.date">
+                                    <span t-esc="timesheet.date.strftime('%Y-%m-%d')"/>
+                                </t>
+                            </td>
+                            <td style="border: none;text-align:center;">
+                                <span t-esc="get_employee_initial(timesheet)"/>
+                            </td>
+                            <td style="border: none;text-align:left;"><span t-field="timesheet.name"/></td>
+                            <td style="border: none;"><span t-field="timesheet.x_studio_rate"/></td>
+                            <td style="border: none;"><span t-field="timesheet.unit_amount" t-options="{'widget': 'duration', 'digital': True, 'unit': 'hour', 'round': 'minute'}" /></td>
+                            <td style="border: none;"><span t-esc="'{0:,.2f}'.format(timesheet.billable)"/></td>
+                        </tr>
+                    </t>
+                </table>
+            </t>
+        </xpath>
+    </template>
+</odoo>

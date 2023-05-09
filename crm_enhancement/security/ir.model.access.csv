@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_matter_type,access_matter_type,model_matter_type,base.group_user,1,1,1,1
+access_main_concern,access_main_concern,model_main_concern,base.group_user,1,1,1,1

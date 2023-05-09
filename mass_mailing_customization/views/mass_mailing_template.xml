@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="unsubscribe_custom" inherit_id="mass_mailing.unsubscribe">
+        <xpath expr="//div[@class='container o_unsubscribe_form']/div[@class='row']/form[@id='unsubscribe_form']/div/t/div[@id='info_state']" position="replace">
+            <div></div>
+        </xpath>
+        <xpath expr="//div[@class='container o_unsubscribe_form']/div[@class='row']/form[@id='unsubscribe_form']/div/t/p" position="replace">
+            <p class="alert alert-success text-center" style="font-size:20px;">You have been successfully unsubscribed</p>
+        </xpath>
+        <xpath expr="//div[@class='container o_unsubscribe_form']/div[@class='row']/form[@id='unsubscribe_form']/div/t/div[@id='div_opt_out']" position="replace">
+            <div></div>
+        </xpath>
+    </template>
+    <template id="unsubscribed_custom" inherit_id="mass_mailing.unsubscribed">
+        <xpath expr="//div[@class='container o_unsubscribe_form']/div[@class='row']/div[@id='div_blacklist']/div[@class='alert alert-warning']" position="replace">
+            <div></div>
+        </xpath>
+    </template>
+</odoo>

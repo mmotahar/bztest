@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    inherit Form view-->
+    <record id="sale_form_view_customization" model="ir.ui.view">
+        <field name="name">sale.form.view.customization</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="payment_process"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

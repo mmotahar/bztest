@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.menu" id="project.menu_projects">
+            <field name="name">Matter</field>
+        </record>
+        <record model="ir.ui.menu" id="project.menu_main_pm">
+            <field name="name">Matters</field>
+        </record>
+        <record model="ir.ui.menu" id="project.menu_projects_config">
+            <field name="name">Matter</field>
+        </record>
+        <record model="ir.ui.menu" id="project.menu_project_config_project_stage">
+            <field name="name">Matter Stages</field>
+        </record>
+        <record model="ir.ui.menu" id="project.menu_projects_group_stage">
+            <field name="name">Matter</field>
+        </record>
+        <record model="ir.ui.menu" id="sale.res_partner_menu">
+            <field name="name">Client</field>
+        </record>
+        <record model="ir.ui.menu" id="crm.res_partner_menu_customer">
+            <field name="name">Client</field>
+        </record>
+        <record model="ir.ui.menu" id="account.menu_finance_receivables">
+            <field name="name">Client</field>
+        </record>
+        <record model="ir.ui.menu" id="project.rating_rating_menu_project">
+            <field name="name">Client Ratings</field>
+        </record>
+        <record model="ir.ui.menu" id="account.menu_account_customer">
+            <field name="name">Client</field>
+        </record>
+                <record id="project.open_view_project_all_group_stage" model="ir.actions.act_window">
+            <field name="name">Matter</field>
+            <field name="res_model">project.project</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="project.view_project_kanban"/>
+            <field name="search_view_id" ref="project.view_project_project_filter"/>
+            <field name="target">main</field>
+            <field name="context">{'search_default_groupby_stage': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No projects found. Let's create one!
+                </p><p>
+                    Projects regroup tasks on the same topic, and each has its dashboard.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

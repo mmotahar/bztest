@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    inherit Form view-->
+    <record id="hr_timesheet_line_tree_customization" model="ir.ui.view">
+        <field name="name">hr_timesheet_line_tree_customization</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="x_studio_rate"/>
+            </xpath>
+            <xpath expr="//field[@name='unit_amount']" position="after">
+<!--                <field name="billable"/>-->
+                <!--                <field name="billable_1"/>-->
+                <field name="billable_2" readonly="1" force_save="1"/>
+<!--                <button name="calculate_billable_amt_for_existing" string="Update Amt on Existing Records" type="object"/>-->
+            </xpath>
+        </field>
+    </record>
+</odoo>

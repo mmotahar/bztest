@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--         Main Concern Form View -->
+        <record id="main_concern_form_view" model="ir.ui.view">
+            <field name="name">Main Concern</field>
+            <field name="model">main.concern</field>
+            <field name="arch" type="xml">
+                <form string="Main Concern Form">
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!--         Main Concern Tree View -->
+        <record id="main_concern_tree_view" model="ir.ui.view">
+            <field name="name">Main Concern</field>
+            <field name="model">main.concern</field>
+            <field name="arch" type="xml">
+                <tree string="Main Concern">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <!--         Main Concern Action -->
+        <record id="main_concern_action" model="ir.actions.act_window">
+            <field name="name">Main Concern</field>
+            <field name="res_model">main.concern</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="main_concern_menu" name="Main Concern" parent="crm.crm_menu_config" action="main_concern_action" sequence="6"/>
+
+    </data>
+</odoo>

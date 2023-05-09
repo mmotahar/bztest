@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="gst_audit_report_view_tree" model="ir.ui.view">
+            <field name="name">gst_audit_report_view_tree</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <tree string="gst_audit_report_tree" create="false" expand="context.get('expand', False)"
+                      multi_edit="1">
+                    <field name="date"/>
+                    <field name="account_id"/>
+                    <field name="company_id"/>
+                    <field name="name"/>
+                    <field name="move_id"/>
+                    <field name="partner_id"/>
+                    <field name="ref"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="gst_grids_r" invisible="1"/>
+                    <field name="gst_sub_grids_r" invisible="1"/>
+                    <field name="x_studio_tax_code"/>
+<!--                    <field name="order_by_fld" invisible="1"/>-->
+                    <field name="date_maturity" invisible="1"/>
+                    <field name="balance" sum="Total Balance" readonly="1" invisible="1"/>
+                    <field name="gst_rpt_gross" sum="Gross" readonly="1"/>
+                    <field name="gst_rpt_gst" sum="GST" readonly="1"/>
+                    <field name="gst_rpt_net" sum="Net" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_account_move_line_inherit_search_v" model="ir.ui.view">
+            <field name="name">view_account_move_line_inherit_search_v</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter string="GST Grids" name="group_by_gst_grids_r" domain="[]"
+                            context="{'group_by': 'gst_grids_r'}"/>
+                    <filter string="GST Sub-Grids" name="group_by_gst_sub_grids_r" domain="[]"
+                            context="{'group_by': 'gst_sub_grids_r'}"/>
+                    <filter string="Tax Code" name="group_by_taxcode" domain="[]"
+                            context="{'group_by': 'x_studio_tax_code'}"/>
+                    <separator/>
+                    <filter string="Tags" name="flt_tax_tag_ids"
+                            domain="[('tax_tag_ids', '!=', False)]"/>
+                    <separator/>
+                    <filter string="Tax code is true" name="flt_x_studio_tax_code"
+                            domain="[('x_studio_tax_code', '!=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="gst_audit_report_action" model="ir.actions.act_window">
+            <field name="name">Custom GST Audit Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_by_gst_grids_r':
+                1,'search_default_group_by_gst_sub_grids_r':1,'search_default_group_by_taxcode':
+                1,'d_order':'order_by_fld desc'}
+            </field>
+            <field name="view_id" ref="gst_audit_report_view_tree"/>
+        </record>
+        <menuitem id="gst_audit_report_menu" name="Custom GST Audit Report"
+                  parent="account_reports.account_reports_audit_reports_menu"
+                  action="gst_audit_report_action" sequence="3"/>
+    </data>
+</odoo>

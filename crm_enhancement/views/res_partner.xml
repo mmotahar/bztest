@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    inherit Form view-->
+    <record id="res_partner_view_customization" model="ir.ui.view">
+        <field name="name">res.partner.view.customization</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="date_of_birth" attrs="{'invisible':[('company_type', '!=', 'person')]}"/>
+            </xpath>
+        </field>
+    </record>
+<!--    Sale order-->
+    <record id="so_customize_for_button" model="ir.ui.view">
+        <field name="name">so_customize_for_button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="update_sequence_for_existing_so" type="object" string="Update SO on existing Rec" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

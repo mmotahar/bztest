@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="mail_notification_paynow_inherit" inherit_id="mail.mail_notification_paynow" name="Mail: Pay Now mail notification template">
+        <xpath expr="//table/tr/td/table/tbody/tr[2]/td/div" position="replace">
+            <t t-if="record._name == 'sale.order' and record.is_send_link == False">
+                <!--                <div></div>-->
+                <div  style="font-size: 14px;text-align:left;"><t t-esc="record.login_user_id.signature"/></div>
+            </t>
+            <t t-elif="record._name == 'account.move'">
+                <div t-if="is_online and not record._context.get('proforma')" style="margin: 32px 0px 32px 0px; text-align: center;">
+                    <a t-att-href="record.custom_access_token"
+                       style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        PREVIEW LINK
+                    </a>
+                </div>
+                <br/>
+                <t  style="font-size: 14px;text-align:left;" t-esc="record.login_user_id.signature"/>
+            </t>
+            <t t-else="">
+                <div t-if="is_online and not record._context.get('proforma')" style="margin: 32px 0px 32px 0px; text-align: center;">
+                    <a t-att-href="record.custom_access_token"
+                       style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        <!--                        <t t-esc="record.custom_access_token"/>-->
+                        <t t-if="record.email_template_name == 'Pending Engagement Letter Reminder Email' or record.email_template_name == 'Send Email: Other Purposes' or record.email_template_name == 'Send Engagement Letter'">
+                            Review and Approve our Engagement Letter
+                        </t>
+                        <t t-else="">
+                            View your signed Engagement Letter
+                        </t>
+                    </a>
+                </div>
+                <br/>
+                <t  style="font-size: 14px;text-align:left;" t-esc="record.login_user_id.signature"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

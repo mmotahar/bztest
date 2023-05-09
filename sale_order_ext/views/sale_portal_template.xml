@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_order_portal_content_extend" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='introduction']" position="replace"/>
+        <xpath expr="//section[4]" position="replace"/>
+        <xpath expr="//section[@id='details']//h3[@id='details']" position="replace"/>
+        <xpath expr="//section[@id='details']/table/thead/tr/th[1]" position="replace">
+            <th class="text-left">Scope of Work</th>
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="replace">
+            <t t-set="partner" t-value="sale_order.partner_id"/>
+            <div class="row">
+                <div class="mb-3 col-12">
+                    <h5>
+                        <strong>
+                            <span style="font-color:blue;">Our Engagement</span>
+                        </strong>
+                    </h5>
+                    <h5>
+                        <strong>
+                            <span style="font-color:blue;">Please Sign Electronically As Soon As Possible</span>
+                        </strong>
+                    </h5>
+                </div>
+            </div>
+            <div id="company_logo" style="text-align:center;">
+                <div class="row">
+                    <div class="col-12">
+                        <img t-if="sale_order.company_id.logo" t-att-src="image_data_uri(sale_order.company_id.logo)"
+                             alt="Logo" width="27%"/>
+                    </div>
+                </div>
+            </div>
+            <div id="informations">
+                <!--<div class="row">
+                    <div class="mb-3 col-12">
+                        <h2>
+                            <strong>Our Engagement</strong>
+                        </h2>
+                        <h4>
+                            <span>Please Sign Electronically As Soon As Possible</span>
+                        </h4>
+                    </div>
+                </div>-->
+                <br/>
+                <div class="row">
+                    <!--<div class="mb-3 col-12"/>-->
+                    <div class="mb-3 col-12 text-center">
+                        <h5>
+                            <b>PRIVATE &amp; CONFIDENTIAL</b>
+                        </h5>
+                    </div>
+                    <!--<div class="mb-4 col-4"/>-->
+                </div>
+
+
+                <!--<div class="row" style="margin-top:10px;">
+                    <div class="col-6"/>
+                    <div class="col-6  text-right">
+                        <h5 t-field="sale_order.company_id.company_details"/>
+                        &lt;!&ndash;<h5 t-esc="sale_order.company_id.vat"/>&ndash;&gt;
+                        &lt;!&ndash;<span>Reference:
+                            <t t-esc="sale_order.x_studio_matter"/>
+                        </span>&ndash;&gt;
+                        <span>Reference:
+                            <t t-esc="sale_order.name"/>
+                        </span>
+                    </div>
+                </div>-->
+                <div class="row" style="margin-top:10px;font-size:11pt;">
+                    <div class="col-6"/>
+                    <div class="col-6  text-right">
+                        <div name="address">
+                            <span t-esc="sale_order.company_id.name"/>
+                            <br/>
+                            <t t-if="sale_order.company_id.street">
+                                <span t-esc="sale_order.company_id.street"/>
+                                <br/>
+                            </t>
+                            <t t-if="sale_order.company_id.street2">
+                                <span t-esc="sale_order.company_id.street2"/>
+                                <br/>
+                            </t>
+                            <div class="">
+                                <span t-esc="sale_order.company_id.city"/>
+                                <span t-esc="sale_order.company_id.state_id.code"/>
+                                <span t-esc="sale_order.company_id.zip"/>
+                            </div>
+                            <span t-esc="sale_order.company_id.country_id.name"/>
+                            <br/>
+                            ABN :
+                            <span t-esc="sale_order.company_id.vat"/>
+                        </div>
+                        <!--<h5 t-esc="sale_order.company_id.vat"/>-->
+                        <!--<span>Reference:
+                            <t t-esc="sale_order.x_studio_matter"/>
+                        </span>-->
+                        <span>Reference:
+                            <t t-esc="sale_order.name"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:6px;font-size:11pt;">
+                    <div class="col-8  text-left">
+                        <!--<span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>-->
+                        <span t-esc="sale_order.date_order.strftime('%d/%m/%Y')" />
+                        <br/>
+                        <span t-if="partner.parent_id"><br/>Client:
+                            <t t-esc="partner.parent_id.name"/>
+                        </span>
+                        <span t-else=""><br/>Client:
+                            <t t-esc="partner.title.name"/>
+                            <t t-esc="partner.name"/>
+                        </span>
+                        <br/>
+                        <span t-if="partner.parent_id">c/o
+                            <t t-esc="partner.title.name"/>
+                            <t t-esc="partner.name"/>
+                        </span>
+                        <br/>
+                        <t t-if="partner.function">
+                            <span>
+                                <t t-esc="partner.function"/>
+                            </span>
+                            <br/>
+                        </t>
+                        <div name="address">
+                            <t t-if="partner.street">
+                                <span t-esc="partner.street"/>
+                                <br/>
+                            </t>
+                            <t t-if="partner.street2">
+                                <span t-esc="partner.street2"/>
+                                <br/>
+                            </t>
+                            <div class="">
+                                <span t-esc="partner.city"/>
+                                <span t-esc="partner.state_id.code"/>
+                                <span t-esc="partner.zip"/>
+                            </div>
+                            <span t-esc="partner.country_id.name"/>
+                        </div>
+                        <br/>
+                        <span>Email:
+                            <t t-esc="partner.email"/>
+                        </span>
+                        <br/>
+                        <br/>
+                        <span>Dear
+                            <t t-esc="partner.name.split(' ')[0]"/>
+                        </span>
+                        <br/>
+                        <br/>
+                        <span>
+                            <strong>Re: Representation —
+                                <!--<t t-esc="partner.x_studio_company_short_name"/>
+                                —-->
+                                <t t-esc="sale_order.x_studio_matter"/>
+                            </strong>
+                        </span>
+                        <br/>
+                    </div>
+                    <div class="col-4"/>
+                </div>
+            </div>
+            <!-- <br/>
+             <br/>-->
+        </xpath>
+
+        <xpath expr="//section[@id='details']" position="before">
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Schedule 1 - Scope of Work and Professional Fees</h2>
+                        <!--<div style="font-size:13pt;font-weight: bold;">Schedule 1 - Scope of Work and Professional
+                            Fees</div>-->
+                        <hr class="mt-0 mb-1"/>
+                        <!--<span>
+                            <t t-esc="partner.x_studio_company_short_name"/>
+                            —
+                            <t t-esc="sale_order.x_studio_matter"/>
+                        </span>
+                        <div>
+                            <t t-esc="sale_order.client_order_ref"/>
+                        </div>-->
+                        <br/>
+                        <!--<h3>Scope of Work - <t t-esc="sale_order.x_studio_matter"/></h3>
+                        &lt;!&ndash;<div style="font-size:11pt;font-weight: bold;">Scope of Work</div>&ndash;&gt;
+                        <hr class="mt-0 mb-1"/>
+                        <span style="font-size:11pt;">You have asked us to provide the following services.</span>
+                        <br/>-->
+                    </div>
+                </div>
+            </section>
+        </xpath>
+
+        <xpath expr="//section[@id='terms']" position="before">
+
+            <section class="mt-5">
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <!--<div style="font-size:11pt;font-weight: bold;">Fixed Fee Services</div>-->
+                        <h3>Fixed Fee Services</h3>
+                        <hr class="mt-0 mb-1"/>
+                        <span style="font-size:11pt;">
+                            Where prices are set out above, the services are provided on a fixed fee basis,
+                            subject to our standard terms and conditions of service, linked below.
+                        </span>
+                        <br/>
+                        <br/>
+                        <span style="font-size:11pt;">
+                            If the services described above are not correct,
+                            please use the chat functionality below to request an amendment.
+                        </span>
+                        <br/>
+                        <br/>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!--<div style="font-size:11pt;font-weight: bold;">Hourly Rate Services</div>-->
+                        <h3>Hourly Rate Services</h3>
+                        <hr class="mt-0 mb-1"/>
+                        <span style="font-size:11pt;">
+                            Where prices are not set out above, or where the scope of work set out above is exceeded,
+                            our services will be provided at our Standard Hourly Rates.
+                        </span>
+                        <br/>
+                        <br/>
+                    </div>
+
+                </div>
+                <div class="row" t-if="sale_order.payment_term_id">
+                    <div class="col-12">
+                        <h3 class="">Payment terms</h3>
+                        <hr class="mt-0 mb-1"/>
+                        <h6>
+                            <span t-field="sale_order.payment_term_id"/>
+                        </h6>
+                    </div>
+                </div>
+                <t t-if="not is_html_empty(sale_order.note)">
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="mt-0 mb-1"/>
+                            <br/>
+                            <h3>
+                                Terms &amp; Conditions
+                            </h3>
+                            <hr class="mt-0 mb-1"/>
+                            <!--<br/>
+                            <span style="font-size:11pt;">
+                                Our standard terms and conditions of service:
+                                <a href="https://biztechlawyers.odoo.com/terms">https://biztechlawyers.odoo.com/terms</a>
+                            </span>-->
+                            <t t-if="sale_order.terms_type == 'html'">
+                                <!-- Note is plain text. This ensures a clickable link  -->
+                                <t t-set="tc_url" t-value="'%s/terms' % (sale_order.get_base_url())"/>
+                                <em>Terms &amp; Conditions:
+                                    <a href="/terms">
+                                        <t t-esc="tc_url"/>
+                                    </a>
+                                </em>
+                            </t>
+                            <t t-else="">
+                                <em t-field="sale_order.note"/>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </section>
+        </xpath>
+        <xpath expr="//section[@id='terms']" position="replace">
+            <!--<section id="terms" class="mt-5" t-if="not is_html_empty(sale_order.note)">
+                    <h3 class="">Terms &amp; Conditions</h3>
+                    <hr class="mt-0 mb-1"/>
+                    <t t-if="sale_order.terms_type == 'html'">-->
+            <!-- Note is plain text. This ensures a clickable link  -->
+            <!--        <t t-set="tc_url" t-value="'%s/terms' % (sale_order.get_base_url())"/>
+                    <em>Terms &amp; Conditions: <a href="/terms"><t t-esc="tc_url"/></a></em>
+                </t>
+                <t t-else="">
+                    <em t-field="sale_order.note"/>
+                </t>
+            </section>-->
+        </xpath>
+    </template>
+
+
+    <template id="sale_order_portal_template_custom" inherit_id="sale.sale_order_portal_template">
+        <xpath expr="//div[hasclass('o_portal_sale_sidebar')]/t/t[3]/ul/li" position="replace">
+            <li class="list-group-item flex-grow-1">
+                <a t-if="sale_order.has_to_be_signed(True)" role="button" class="btn btn-primary btn-block mb8"
+                   data-toggle="modal" data-target="#modalaccept" href="#">
+                    <i class="fa fa-check"/>
+                    <t t-if="sale_order.has_to_be_paid(True)">Sign &amp; Pay</t>
+                    <t t-else="">Accept &amp; Sign</t>
+                </a>
+                <t t-elif="sale_order.has_to_be_paid(True)">
+                    <t t-if="sale_order.payment_process == 'Pre-Paid'">
+                        <a role="button" id="o_sale_portal_paynow" data-toggle="modal" data-target="#modalaccept"
+                           href="#"
+                           t-att-class="'btn-block mb8 %s' % ('btn btn-light' if sale_order.transaction_ids else 'btn btn-primary')">
+                            <i class="fa fa-check"/>
+                            <t t-if="not sale_order.signature">Accept &amp; Pay</t>
+                            <t t-else="">Pay Now</t>
+                        </a>
+                    </t>
+                </t>
+                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                    <div class="btn-group flex-grow-1 mr-1 mb-1">
+                        <a class="btn btn-secondary btn-block o_download_btn"
+                           t-att-href="sale_order.get_portal_url(report_type='pdf', download=True)" title="Download">
+                            <i class="fa fa-download"/>
+                            Download
+                        </a>
+                    </div>
+                    <div class="btn-group flex-grow-1 mb-1">
+                        <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print"
+                           t-att-href="sale_order.get_portal_url(report_type='pdf')" id="print_invoice_report"
+                           title="Print" target="_blank">
+                            <i class="fa fa-print"/>
+                            Print
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_sale_sidebar')]/div[@id='quote_content']/div[8]" position="replace">
+            <div t-if="sale_order.has_to_be_signed(True) or sale_order.has_to_be_paid(True)"
+                 class="row justify-content-center text-center d-print-none pt-1 pb-4">
+
+                <t t-if="sale_order.has_to_be_signed(True)">
+                    <div class="col-sm-auto mt8">
+                        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#modalaccept"
+                           href="#">
+                            <i class="fa fa-check"/>
+                            <t t-if="sale_order.has_to_be_paid(True)">Sign &amp; Pay</t>
+                            <t t-else="">Accept &amp; Sign</t>
+                        </a>
+                    </div>
+                    <div class="col-sm-auto mt8">
+                        <a role="button" class="btn btn-secondary" href="#discussion">
+                            <i class="fa fa-comment"/>
+                            Feedback
+                        </a>
+                    </div>
+                    <div class="col-sm-auto mt8">
+                        <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldecline"
+                           href="#">
+                            <i class="fa fa-times"/>
+                            Reject
+                        </a>
+                    </div>
+                </t>
+                <div t-elif="sale_order.has_to_be_paid(True)" class="col-sm-auto mt8">
+                    <t t-if="sale_order.payment_process == 'Pre-Paid'">
+                        <a role="button" data-toggle="modal" data-target="#modalaccept" href="#"
+                           t-att-class="'%s' % ('btn btn-light' if sale_order.transaction_ids else 'btn btn-primary')">
+                            <i class="fa fa-check"/>
+                            <t t-if="not sale_order.signature">Accept &amp; Pay</t>
+                            <t t-else="">Pay Now</t>
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

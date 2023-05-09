@@ -1,0 +1,317 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+        <!--Email template -->
+        <record id="send_engagement_signed_temp" model="mail.template">
+            <field name="name">Engagement Letter Signed Successfully Email</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">REMINDER: Please sign this document</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+                        Thank you for signing our engagement letter.
+                        <br/><br/>
+                        If you would like a signed copy for your records, you can download it from the link below.
+                        <br/><br/>
+                        Kind Regards,
+                        <br/><br/>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="send_quote_lost_temp" model="mail.template">
+            <field name="name">Quote Lost</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Thanks for the opportunity</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+                        Sorry we were out of your price range. We enjoyed meeting with you and hearing about your work at <t t-out="object.partner_id.x_studio_company_short_name or ''" />
+                        <br/><br/>
+                        If another opportunity arises for us to quote for other work, please let me know.
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="send_engagement_letter_temp" model="mail.template">
+            <field name="name">Send Engagement Letter</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers engagement letter - for signing</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+
+                        Thanks for the opportunity to work on this matter with you.  We're excited to get started.
+                        <br/><br/>
+
+                        You can access our fee estimate and engagement terms by clicking the link below.  These documents set out all of our terms, fees and other information we are required to give you per our professional obligations.
+                        <br/><br/>
+                        You can sign the engagement letter electronically.  Please sign it as soon as you get a chance.  If you have any questions, please let us know or use the chat function within the portal.
+                        <br/>
+                        <br/><br/>
+                        Thanks and kindest regards,
+                        <br/><br/>
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="pending_engagement_letter_reminder_temp" model="mail.template">
+            <field name="name">Pending Engagement Letter Reminder Email</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">REMINDER: Please sign this document</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+                        Below is a link to our fee estimate and engagement terms.
+                        <br/><br/>
+                        You can view and sign it online from your computer or smartphone.
+                        <br/><br/>
+                        Please sign and submit it as soon as you're able.<br/>
+                        <br/><br/>
+                        Thanks and kindest regards,
+                        <br/><br/>
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+        <record id="followup_step_1_temp" model="mail.template">
+            <field name="name">Follow up (Step 1) - Follow up</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Following Up</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+
+                        I hope you are well.
+                        <br/><br/>
+
+                        I really enjoyed meeting last week and discussing your work with  <t t-out="object.partner_id.x_studio_company_short_name or ''" /> and your future plans.
+                        <br/><br/>
+                        How are you getting on thinking about next steps?
+                        <br/><br/>
+                        Cheers,
+                        <br/><br/>
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+        <record id="followup_step_2_temp" model="mail.template">
+            <field name="name">Follow up (Step 2) - Further Follow Up</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Further Follow Up</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+
+                        I hope you are well.
+                        <br/><br/>
+
+                        Did you have a chance to look over the outline and quote for the <t t-out="object.partner_id.x_studio_company_short_name or ''" /> matter that I sent over?
+                        <br/><br/>
+                        How are you getting on thinking about next steps?
+                        <br/><br/>
+                        Cheers
+                        <br/><br/>
+
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+        <record id="followup_step_3_temp" model="mail.template">
+            <field name="name">Follow Up (Step 3) - Final Follow Up</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Final Follow Up</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+                        I hope you are well.
+                        <br/><br/>
+                        Just following up here as I didn't hear back from you on this.
+                        <br/><br/>
+                        Let me know what is happening on your side.
+                        <br/><br/>
+                        Cheers
+                        <br/><br/>
+
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+        <record id="followup_step_4_temp" model="mail.template">
+            <field name="name">Follow Up (Step 4) - Long time since connected - looking for new work</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Following Up</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;font-size:15px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />
+                        <br/><br/>
+                        I hope you are well.
+                        <br/><br/>
+                        It's been a while since we spoke - a few months back you were thinking about <t t-out="object.partner_id.x_studio_company_short_name"/>.
+                        <br/><br/>
+                        Have you sorted that matter out now?What else is news on your side?
+                        <br/><br/>
+                        On our side - we are in the process of launching Biztech Lawyers in the UK, Singapore and the EU.
+                        <br/><br/>
+                        If you'd like to discuss anything you're currently working on, feel free to set up a time to talk using my meeting link.
+                        <br/><br/>
+                        Cheers
+                        <br/><br/>
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="send_quote_following_meeting_temp" model="mail.template">
+            <field name="name">Send Quote Following Meeting New</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Biztech Lawyers: Thanks for meeting with us Up</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="box-sizing:border-box;margin: 0px; padding: 0px;font-size:14px;">
+                        <span>Hi</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" data-oe-t-inline="true" contenteditable="false"></t>
+                        <br/><br/>
+                        It was great meeting you, thank you for taking the time. It was really good to get to know more about   <t t-out="object.partner_id.x_studio_company_short_name or ''" data-oe-t-inline="true" contenteditable="false"></t>.
+                        <br/><br/>
+                        Building on our discussion, here's a quick recap on how we can help and our pricing:
+                        <br/><br/>
+                    </p>
+                    <div>
+                        <!--                        <div t-foreach="object.order_line" t-as="line" data-oe-t-inline="true">-->
+                        <div t-foreach="object.order_line" t-as="line">
+                            <t t-if="line.portal_checkbox">
+                                <ul style="margin:0px 0 12px 0;box-sizing:border-box;">
+                                    <li style="font-size: 14px;"><t t-out="line.product_id.name"></t> - <t t-out="line.price_unit"></t> </li>
+                                </ul>
+                            </t>
+                        </div>
+                    </div>
+                    <br/>
+                    <span style="font-size: 14px;"><strong><b>Next steps</b></strong>
+                    </span><br/><br/><span style="font-size: 14px;">
+                    Please let me know if you'd like to discuss this further. If you want to proceed, we can send over an engagement letter and get started right away.
+                </span><br/><br/><span style="font-size: 14px;">
+                    Looking forward to working with you!
+                </span><br/><br/><span style="font-size: 14px;">
+                    Warmest Regards,</span>
+                    <br/><br/>
+                    <!--                    <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+                    <p style="margin:0px 0 12px 0;box-sizing:border-box;"/>
+                </div>
+
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="account_move_tax_temp" model="mail.template">
+            <field name="name">Tax Invoice - Final</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="subject">Your Biztech Lawyers Tax Invoice</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px;font-size:15px;">
+                        <span>Dear</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />,
+                        <br/><br/>
+                        Thank you kindly for your continuing instructions.
+                        <br/><br/>
+                        Attached is your tax invoice.  For payment options, you can use EFT or credit card using the link shown.
+                        <br/><br/>
+                        Thanks again,
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="biztech_invoice_reports.report_tax_invoice"/>
+            <field name="report_name">{{ (object.name or '').replace('/','_') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="outstanding_balance_temp" model="mail.template">
+            <field name="name">Outstanding Balance template - Final</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="subject">An outstanding balance from Biztech Lawyers</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px;font-size:15px;">
+                        <span>Dear</span> <t t-out="object.partner_id and object.partner_id.firstname or ''" />,
+                        <br/><br/>
+                        This is a friendly reminder that you have an outstanding balance that is yet to be paid.
+                        <br/><br/>
+                        We'd kindly appreciate if you could settle the balance as soon as possible.
+                        <br/><br/>
+                        For payment options, you can use EFT or credit card using the link shown on the back page.
+                        <br/><br/>
+                        Thanks again,
+<!--                        <br/><br/>-->
+<!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+        </record>
+
+        <record id="other_purposes_email_temp" model="mail.template">
+            <field name="name">Send Email: Other Purposes</field>
+            <field name="email_from">{{ (user.email_formatted or object.user_id.email_formatted) }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Other Purposes Email from Biztech Lawyers</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px;font-size:15px;">
+                        <br/><br/>
+                        <!--                        <span style="font-size: 14px;"><t t-out="user.signature" data-oe-t-inline="true" contenteditable="false"/></span>-->
+                    </p>
+                </div>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
